@@ -8,20 +8,30 @@
 import { defineComponent } from 'vue'
 
 import dynamicForm from '@/components/dynamic-form.vue'
-import { DynamicForm } from '@/types'
+import { tDynamicForm } from '@/types'
 
 export default defineComponent({
   name: 'Home',
   components: {
     dynamicForm
   },
-  data: () => {
+  data (): {
+    dataForm: tDynamicForm[];
+    } {
     return {
       dataForm: [
         { id: 'AComponent', name: 'A' },
         { id: 'AComponent', name: 'A' },
-        { id: 'BComponent', name: 'B' }
-      ] as DynamicForm[]
+        { id: 'BComponent', name: 'B' },
+        {
+          id: 'AppInput',
+          name: 'fields/app-input',
+          props: {
+            label: 'hi fhjk h jh ',
+            placeholder: '333'
+          }
+        }
+      ]
     }
   }
 })

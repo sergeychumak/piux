@@ -1,22 +1,23 @@
 <template>
-  <div>
+  <div class="dynamic-form">
     <component
       v-for="(field, fieldIndex) in dataForm"
       :is="field.id"
       :key="fieldIndex"
+      v-bind="field.props"
     />
   </div>
 </template>
 
 <script lang="ts">
 import { defineAsyncComponent, defineComponent } from 'vue'
-import { DynamicForm } from '@/types'
+import { tDynamicForm } from '@/types'
 
 export default defineComponent({
   name: 'DynamicForm',
   props: {
     dataForm: {
-      type: Array as () => DynamicForm[],
+      type: Array as () => tDynamicForm[],
       default: []
     }
   },
@@ -34,4 +35,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+  .dynamic-form {
+
+  }
 </style>

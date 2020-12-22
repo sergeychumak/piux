@@ -1,8 +1,5 @@
-type DynamicForm = {
+export type tDynamicForm = {
   id: string;
   name: string;
-}
-
-export {
-  DynamicForm
+  props?: any;
 }
