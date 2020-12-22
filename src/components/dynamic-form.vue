@@ -4,7 +4,7 @@
       v-for="(field, fieldIndex) in dataForm"
       :is="field.id"
       :key="fieldIndex"
-      v-bind="field.props"
+      v-bind="Object.assign(field.defaultProps, field.props) "
     />
   </div>
 </template>
@@ -26,7 +26,7 @@ export default defineComponent({
     this.dataForm.forEach((element) => {
       Object.assign(this.$options.components, {
         [element.id]: defineAsyncComponent(() =>
-          import(/* webpackChunkName: "filed/[request]" */ `@/components/${element.name}`)
+          import(/* webpackChunkName: "filed/[request]" */ '@/components/' + element.path)
         )
       })
     })
@@ -36,6 +36,8 @@ export default defineComponent({
 
 <style scoped lang="scss">
   .dynamic-form {
-
+    margin: 30px;
+    padding: 30px;
+    border: 1px solid #eee;
   }
 </style>

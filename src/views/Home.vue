@@ -8,6 +8,7 @@
 import { defineComponent } from 'vue'
 
 import dynamicForm from '@/components/dynamic-form.vue'
+import DescAppInput from '@/assets/d/app-input'
 import { tDynamicForm } from '@/types'
 
 export default defineComponent({
@@ -20,17 +21,11 @@ export default defineComponent({
     } {
     return {
       dataForm: [
-        { id: 'AComponent', name: 'A' },
-        { id: 'AComponent', name: 'A' },
-        { id: 'BComponent', name: 'B' },
-        {
-          id: 'AppInput',
-          name: 'fields/app-input',
+        Object.assign(DescAppInput, {
           props: {
-            label: 'hi fhjk h jh ',
-            placeholder: '333'
+            label: 'Привет как дела?'
           }
-        }
+        })
       ]
     }
   }

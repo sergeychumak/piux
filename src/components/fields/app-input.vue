@@ -1,5 +1,5 @@
 <template>
-  <div class="field">
+  <div class="app-input field">
     <label class="label">{{ label }}</label>
     <div class="control">
       <input class="input" type="text" :placeholder="placeholder">
@@ -26,4 +26,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+  .app-input {
+  }
 </style>

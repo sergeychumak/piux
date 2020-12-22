@@ -1,5 +1,6 @@
 export type tDynamicForm = {
   id: string;
-  name: string;
+  path: string;
+  defaultProps?: any;
   props?: any;
 }
