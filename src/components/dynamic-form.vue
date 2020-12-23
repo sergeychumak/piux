@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { defineAsyncComponent, defineComponent } from 'vue'
-import { tDynamicForm } from '@/types'
+import { tDynamicForm } from '@/assets/types'
 
 export default defineComponent({
   name: 'DynamicForm',

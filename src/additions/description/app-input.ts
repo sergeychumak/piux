@@ -1,4 +1,4 @@
-import { tAppInput } from '@/types/fields/app-input'
+import { tAppInput } from '@/assets/types/fields/app-input'
 
 const DescAppInput: tAppInput = {
   id: 'AppInput',

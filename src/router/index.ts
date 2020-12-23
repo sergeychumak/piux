@@ -1,11 +1,19 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
+import Main from '../additions/layouts/main.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Main',
+    component: Main,
+    children: [
+      {
+        path: '/form/:id?',
+        name: 'Form',
+        component: () => import(/* webpackChunkName: "dynamic-form-page" */ '../additions/pages/dynamic-form-page.vue'),
+        props: true
+      }
+    ]
   }
 ]
 
