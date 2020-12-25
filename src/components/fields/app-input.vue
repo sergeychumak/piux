@@ -6,18 +6,34 @@
         class="input"
         type="text"
         :placeholder="placeholder"
-        :value="value"
-      >
+        v-model="message"
+      />
     </div>
-    {{ value }}
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 
 export default defineComponent({
   name: 'app-input',
+  setup (props, { emit }) {
+    const message = computed({
+      get: () => props.value,
+      set: (value) => {
+        if (props.id) {
+          const res: { [index: string]: any } = {
+            [props.id]: value
+          }
+          emit('set-new-value', res)
+        }
+      }
+    })
+
+    return {
+      message
+    }
+  },
   props: {
     id: {
       type: String,

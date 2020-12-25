@@ -18,6 +18,7 @@
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
+    "@sm-monobrands/eslint-config": "^1.0.3",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^5.2.4",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
@@ -53,7 +54,8 @@
     "extends": [
       "plugin:vue/vue3-essential",
       "@vue/standard",
-      "@vue/typescript/recommended"
+      "@vue/typescript/recommended",
+      "@sm-monobrands/eslint-config"
     ],
     "parserOptions": {
       "ecmaVersion": 2020

@@ -5,10 +5,8 @@ import { tDescriptionForm } from '@/additions/types'
 const { loadDescriptionFormByIdTest, loadValueFormByIdTest } = defaultExport
 
 export default createStore({
-  state: {
-  },
-  mutations: {
-  },
+  state: {},
+  mutations: {},
   actions: {
     loadDescriptionForm (id): tDescriptionForm {
       return loadDescriptionFormByIdTest(id)
@@ -23,6 +21,5 @@ export default createStore({
         })
     }
   },
-  modules: {
-  }
+  modules: {}
 })

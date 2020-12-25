@@ -5,10 +5,19 @@
       v-for="(field, fieldIndex) in dataForm.data"
       :is="field.component"
       :id="field.id"
-      :value="valueForm[field.id]"
+      :value="value[field.id]"
       :key="fieldIndex"
       v-bind="field.props"
+      @set-new-value="setNewValue($event)"
     />
+    <button
+      class="button is-info mr-5"
+      @click="clickSave"
+    >save</button>
+    <button
+      class="button is-small"
+      @click="clickRestore"
+    >restore</button>
   </div>
 </template>
 
@@ -21,7 +30,8 @@ const mapComponents: {[index: string]: string} = {
 }
 
 export default defineComponent({
-  name: 'DynamicForm',
+  name: 'dynamic-form',
+  components: {},
   props: {
     dataForm: {
       type: Object as () => tDescriptionForm,
@@ -32,13 +42,29 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  components: {},
+  data () {
+    return {
+      value: Object.assign({}, this.valueForm)
+    }
+  },
+  methods: {
+    setNewValue (value: string | any) {
+      this.value = Object.assign(this.value, value)
+    },
+    clickSave () {
+      console.log(this.value)
+    },
+    clickRestore () {
+      // console.log(this.valueForm)
+      this.value = Object.assign({}, this.valueForm)
+    }
+  },
   created () {
     this.dataForm.data.forEach((element) => {
       const { [element.component]: path } = mapComponents
       Object.assign(this.$options.components, {
         [element.component]: defineAsyncComponent(() =>
-          import(/* webpackChunkName: "filed/[request]" */ '@/components/' + path)
+          import(/* webpackChunkName: "filed/[request]" */ `@/components/${path}`)
         )
       })
     })

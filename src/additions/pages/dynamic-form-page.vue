@@ -22,7 +22,7 @@ import Store from '@/store'
 import { tDescriptionForm } from '@/additions/types'
 
 export default defineComponent({
-  name: 'DynamicFormPage',
+  name: 'dynamic-form-page',
   components: {
     DynamicForm: defineAsyncComponent(() =>
       import(/* webpackChunkName: "dynamic-form" */ '../../components/dynamic-form.vue')

@@ -48,7 +48,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Main'
+  name: 'main-layout'
 })
 </script>
 
