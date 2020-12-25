@@ -1,5 +1,6 @@
 const Endpoints = {
-  descriptionForm: '/api/form/description'
+  descriptionForm: '/api/form/description',
+  valueForm: '/api/form/value',
 }
 
 export default {

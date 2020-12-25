@@ -1,16 +1,24 @@
-export const descriptionFormByIdTest = [
-  {
-    component: 'app-input',
-    id: 'name',
-    props: {
-      label: 'Тестовое название'
-    }
+import { tDescriptionForm } from '@/additions/types'
+
+export const descriptionFormByIdTest: tDescriptionForm = {
+  form: {
+    name: 'Тестовая форма'
   },
-  {
-    component: 'app-input',
-    id: 'desc',
-    props: {
-      label: 'Тестовое описание'
+  data: [
+    {
+      component: 'appInput',
+      id: 'name',
+      props: {
+        label: 'Тестовое название'
+      }
+    },
+    {
+      component: 'appInput',
+      id: 'desc',
+      props: {
+        label: 'Тестовое описание 123',
+        placeholder: 'text'
+      }
     }
-  }
-]
+  ]
+}

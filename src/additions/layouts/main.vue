@@ -41,35 +41,14 @@
     <div class="main-layout__content">
       <router-view/>
     </div>
-<!--    <dynamic-form :data-form="dataForm"/>-->
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-// import dynamicForm from '@/components/dynamic-form.vue'
-// import DescAppInput from '@/additions/d/app-input'
-// import { tDynamicForm } from '@/assets/types'
-
 export default defineComponent({
-  name: 'Home',
-  components: {
-    // dynamicForm
-  }
-  // data (): {
-  //   dataForm: tDynamicForm[];
-  //   } {
-  //   return {
-  //     dataForm: [
-  //       Object.assign(DescAppInput, {
-  //         props: {
-  //           label: 'Привет как дела?'
-  //         }
-  //       })
-  //     ]
-  //   }
-  // }
+  name: 'Main'
 })
 </script>
 
@@ -79,7 +58,7 @@ export default defineComponent({
     height: 100%;
 
     &__menu {
-      flex-basis: 325px;
+      flex-basis: 20%;
       padding: 20px;
       overflow: auto;
       box-shadow:
@@ -91,6 +70,7 @@ export default defineComponent({
 
     &__content {
       padding: 20px;
+      width: 80%;
     }
   }
 </style>

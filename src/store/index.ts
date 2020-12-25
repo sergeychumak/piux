@@ -1,7 +1,8 @@
 import { createStore } from 'vuex'
 import defaultExport from '../api/entry-api'
+import { tDescriptionForm } from '@/additions/types'
 
-const { loadDescriptionFormByIdTest } = defaultExport
+const { loadDescriptionFormByIdTest, loadValueFormByIdTest } = defaultExport
 
 export default createStore({
   state: {
@@ -9,9 +10,15 @@ export default createStore({
   mutations: {
   },
   actions: {
-    loadTest (id) {
+    loadDescriptionForm (id): tDescriptionForm {
       return loadDescriptionFormByIdTest(id)
-        .then((resp: { data: any }) => {
+        .then((resp: { data: tDescriptionForm }) => {
+          return resp.data
+        })
+    },
+    loadValueForm (id) {
+      return loadValueFormByIdTest(id)
+        .then((resp: { data: { [index: string]: any } }) => {
           return resp.data
         })
     }
