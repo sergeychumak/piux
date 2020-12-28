@@ -55,9 +55,11 @@ export default defineComponent({
   },
   mounted () {
     Store.dispatch('loadDescriptionForm', 'test').then((res: tDescriptionForm) => {
+      // console.log(res)
       this.descriptionForm = res
     })
     Store.dispatch('loadValueForm', 'test').then((res: { [index: string]: any }) => {
+      // console.log(res)
       this.valueForm = res
     })
   }

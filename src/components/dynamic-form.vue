@@ -10,6 +10,7 @@
       v-bind="field.props"
       @set-new-value="setNewValue($event)"
     />
+    {{ value }}
     <button
       class="button is-info mr-5"
       @click="clickSave"
@@ -22,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent, defineComponent } from 'vue'
+import { defineAsyncComponent, defineComponent, reactive, watch, ref } from 'vue'
 import { tDescriptionForm } from '@/additions/types'
 
 const mapComponents: {[index: string]: string} = {
@@ -32,6 +33,19 @@ const mapComponents: {[index: string]: string} = {
 export default defineComponent({
   name: 'dynamic-form',
   components: {},
+  setup (props) {
+    const value = ref({
+      ...props.valueForm
+    })
+    watch(() => props.valueForm, (first) => {
+      value.value = {
+        ...first
+      }
+    })
+    return {
+      value
+    }
+  },
   props: {
     dataForm: {
       type: Object as () => tDescriptionForm,
@@ -42,11 +56,6 @@ export default defineComponent({
       default: () => ({})
     }
   },
-  data () {
-    return {
-      value: Object.assign({}, this.valueForm)
-    }
-  },
   methods: {
     setNewValue (value: string | any) {
       this.value = Object.assign(this.value, value)
@@ -55,11 +64,11 @@ export default defineComponent({
       console.log(this.value)
     },
     clickRestore () {
-      // console.log(this.valueForm)
       this.value = Object.assign({}, this.valueForm)
     }
   },
   created () {
+    console.log('created')
     this.dataForm.data.forEach((element) => {
       const { [element.component]: path } = mapComponents
       Object.assign(this.$options.components, {
