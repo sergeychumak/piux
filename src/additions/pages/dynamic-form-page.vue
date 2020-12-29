@@ -11,7 +11,6 @@
         :data-form="descriptionForm"
         :value-form="valueForm"
       />
-<!--      {{ descriptionForm }}-->
     </template>
   </div>
 </template>

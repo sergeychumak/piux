@@ -13,6 +13,13 @@ export const descriptionFormByIdTest: tDescriptionForm = {
       }
     },
     {
+      component: 'appLabel',
+      id: 'checker',
+      props: {
+        label: 'Тестовое чекер'
+      }
+    },
+    {
       component: 'appInput',
       id: 'desc',
       props: {

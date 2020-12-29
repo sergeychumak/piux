@@ -10,13 +10,12 @@
       v-bind="field.props"
       @set-new-value="setNewValue($event)"
     />
-    {{ value }}
     <button
-      class="button is-info mr-5"
+      class="button is-info mr-3"
       @click="clickSave"
     >save</button>
     <button
-      class="button is-small"
+      class="button"
       @click="clickRestore"
     >restore</button>
   </div>
@@ -27,7 +26,8 @@ import { defineAsyncComponent, defineComponent, reactive, watch, ref } from 'vue
 import { tDescriptionForm } from '@/additions/types'
 
 const mapComponents: {[index: string]: string} = {
-  appInput: 'fields/app-input'
+  appInput: 'fields/app-input',
+  appLabel: 'fields/app-label'
 }
 
 export default defineComponent({

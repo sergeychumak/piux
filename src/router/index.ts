@@ -12,6 +12,12 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Form',
         component: () => import(/* webpackChunkName: "dynamic-form-page" */ '../additions/pages/dynamic-form-page.vue'),
         props: true
+      },
+      {
+        path: '/table/:id?',
+        name: 'Table',
+        component: () => import(/* webpackChunkName: "dynamic-table-page" */ '../additions/pages/dynamic-table-page.vue'),
+        props: true
       }
     ]
   }

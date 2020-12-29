@@ -6,7 +6,8 @@
       </p>
       <ul class="menu-list">
         <li><router-link :to="{ name: 'Main' }">Гавная</router-link></li>
-        <li><router-link :to="{ name: 'Form', params: { id: 'test' } }">Роутинг с формой</router-link></li>
+        <li><router-link :to="{ name: 'Form', params: { id: 'test' } }">Динамическая форма</router-link></li>
+        <li><router-link :to="{ name: 'Table', params: { id: 'test' } }">Динамическая таблица</router-link></li>
         <li><router-link :to="{ name: 'Form' }">Плохой роутинг</router-link></li>
         <li><a>Другой роутинг</a></li>
         <li><a>Dashboard</a></li>
