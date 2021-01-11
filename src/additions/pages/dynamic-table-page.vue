@@ -1,68 +1,55 @@
 <template>
   <div class="dynamic-form-page">
-    <div
-      class="notification is-danger"
-      v-if="isExistsId"
-    >
-      I can not display the form I need an <strong>id</strong> parameter
+    <div v-if="loading">
+      loading...
     </div>
-    <template v-else>
-      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-        <thead>
+    <div>{{ name }}</div>
+    <table class="table">
+      <thead>
         <tr>
-          <th><abbr title="Position">Pos</abbr></th>
-          <th>Team</th>
-          <th><abbr title="Played">Pld</abbr></th>
-          <th><abbr title="Won">W</abbr></th>
-          <th><abbr title="Drawn">D</abbr></th>
-          <th><abbr title="Lost">L</abbr></th>
-          <th><abbr title="Goals for">GF</abbr></th>
-          <th><abbr title="Goals against">GA</abbr></th>
-          <th><abbr title="Goal difference">GD</abbr></th>
-          <th><abbr title="Points">Pts</abbr></th>
-          <th>Qualification or relegation</th>
+          <th
+            v-for="(element, key) in header"
+            :key="key"
+          >
+            {{ element.label }}
+          </th>
         </tr>
-        </thead>
-        <tfoot>
-        <tr>
-          <th><abbr title="Position">Pos</abbr></th>
-          <th>Team</th>
-          <th><abbr title="Played">Pld</abbr></th>
-          <th><abbr title="Won">W</abbr></th>
-          <th><abbr title="Drawn">D</abbr></th>
-          <th><abbr title="Lost">L</abbr></th>
-          <th><abbr title="Goals for">GF</abbr></th>
-          <th><abbr title="Goals against">GA</abbr></th>
-          <th><abbr title="Goal difference">GD</abbr></th>
-          <th><abbr title="Points">Pts</abbr></th>
-          <th>Qualification or relegation</th>
-        </tr>
-        </tfoot>
-        <tbody>
-        <tr>
-          <th>1</th>
-          <td><a href="https://en.wikipedia.org/wiki/Leicester_City_F.C." title="Leicester City F.C.">Leicester City</a> <strong>(C)</strong>
-          </td>
-          <td>38</td>
-          <td>23</td>
-          <td>12</td>
-          <td>3</td>
-          <td>68</td>
-          <td>36</td>
-          <td>+32</td>
-          <td>81</td>
-          <td>Qualification for the <a href="https://en.wikipedia.org/wiki/2016%E2%80%9317_UEFA_Champions_League#Group_stage" title="2016–17 UEFA Champions League">Champions League group stage</a></td>
-        </tr>
-        </tbody>
-      </table>
-    </template>
+<!--        <tr v-for="(elementBody, keyBody) in body" :key="keyBody">-->
+<!--          <td v-for="(elementHeader, keyHeader) in header" :key="`${keyBody}-${keyHeader}`">-->
+<!--            <component-->
+<!--              :is="elementHeader.component"-->
+<!--              :value="elementBody[keyHeader]"-->
+<!--            />-->
+<!--          </td>-->
+<!--        </tr>-->
+      </thead>
+    </table>
   </div>
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent, defineComponent } from 'vue'
+import { defineComponent, defineAsyncComponent } from 'vue'
 import Store from '@/store'
-import { tDescriptionForm } from '@/additions/types'
+
+// ==========================
+// TYPE
+// ==========================
+type THeader = { [index: string]: TElementHeader }
+type TElementHeader = {
+  component: string;
+  label: string;
+}
+
+// ==========================
+// MAP
+// ==========================
+const mapComponents: {[index: string]: string} = {
+  AppTextTable: 'table/app-text-table',
+  AppBooleanTable: 'table/app-boolean-table'
+}
+// ==========================
+// ==========================
+// ==========================
 
 export default defineComponent({
   name: 'dynamic-table-page',
@@ -74,33 +61,127 @@ export default defineComponent({
     }
   },
   data (): {
-    descriptionForm: tDescriptionForm;
-    valueForm: { [index: string]: any };
+    loading: boolean;
+    name: string;
+    header: THeader;
     } {
     return {
-      descriptionForm: {
-        form: {
-          name: ''
-        },
-        data: []
-      },
-      valueForm: {}
+      loading: true,
+      name: '',
+      header: {}
     }
   },
-  computed: {
-    isExistsId (): boolean {
-      return !this.id
+  methods: {
+    loadComponent11111 (header: THeader) {
+      // const asd = 1000
+      // if (header) {
+      //   setTimeout(() => {
+      //     // return new Promise((resolve) => {
+      //     //   resolve('123')
+      //     // })
+      //     const aaa: any = []
+      //     Object.keys(header).forEach((element) => {
+      //       const { [element]: key } = header
+      //       const { [key.component]: path } = mapComponents
+      //       console.log('loadComponent: ', key.component, path)
+      //       // this.defComponent(key.component, path)
+      //       // console.log(key.component, `@/components/${path}`)
+      //       const test = defineAsyncComponent(() =>
+      //         import(/* webpackChunkName: "table/[request]" */ `@/components/${path}`)
+      //       )
+      //       aaa.push(test)
+      //       // await Object.assign(this.$options.components, {
+      //       //   [key.component]: test
+      //       // })
+      //     })
+      //     return new Promise(test)
+      //   }, asd)
+      // }
+    },
+    test () {
+      console.log('asd')
+    },
+    async aaasss (path: string) {
+      const aaaa = 2000
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          console.log('2')
+          resolve()
+        }, aaaa)
+      })
+      // const aaaa = 2000
+      // const asyncComponent = await defineAsyncComponent(() =>
+      //   import(/* webpackChunkName: "table/[request]" */ `@/components/${path}.vue`)
+      // )
+      //
+      // setTimeout(() => {
+      //   console.log('2')
+      //   return asyncComponent
+      // }, aaaa)
+    },
+    async getHeader (id: string) {
+      await Store
+        .dispatch('loadTableHeader', id)
+        .then((res) => {
+          const { name: nameRes } = res
+          const { header: headerRes } = res
+          this.name = nameRes
+          this.header = headerRes
+        })
+    },
+    async loadComponent (key: string, path: string) {
+      console.log('loadComponent: ', path)
+      const component = await defineComponent(() => {
+        import(/* webpackChunkName: "table/[request]" */ `@/components/${path}`)
+      })
+      Object.assign(this.$options.components, {
+        [key]: component
+      })
     }
   },
-  mounted () {
-    // Store.dispatch('loadDescriptionForm', 'test').then((res: tDescriptionForm) => {
-    //   // console.log(res)
-    //   this.descriptionForm = res
+  async created () {
+    console.log('1')
+    await this.getHeader(this.id)
+    console.log(this.name)
+    console.log(this.header)
+    console.log('1.1')
+    const arrayComponents: any = []
+    Object.keys(this.header).forEach((element) => {
+      const { header: { [element]: key } } = this
+      const { [key.component]: path } = mapComponents
+      arrayComponents.push(this.loadComponent(key.component, path))
+    })
+    console.log('1.2')
+    Promise.all(arrayComponents).then(() => {
+      console.log('0')
+    })
+
+    // a111.then(() => {
+    //
     // })
-    // Store.dispatch('loadValueForm', 'test').then((res: { [index: string]: any }) => {
-    //   // console.log(res)
-    //   this.valueForm = res
-    // })
+
+    // Store
+    //   .dispatch('loadTableHeader', 'test')
+    //   .then(async (res) => {
+    //     const { name: nameRes } = res
+    //     const { header: headerRes } = res
+    //     this.name = nameRes
+    //     this.header = headerRes
+    //     await this.loadComponent(headerRes)
+    //     console.log('asd1')
+    //     // await this.test()
+    //     // Store
+    //     //   .dispatch('loadTableBody', 'test')
+    //     //   .then((resBody) => {
+    //     //     this.body = resBody
+    //     //   })
+    //     //   .catch((error) => {
+    //     //     this.error = error
+    //     //   })
+    //   })
+    //   .catch((error) => {
+    //     this.error = error
+    //   })
   }
 })
 </script>
