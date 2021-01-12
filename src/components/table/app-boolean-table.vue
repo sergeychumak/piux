@@ -1,7 +1,7 @@
 <template>
   <div class="app-boolean-table">
-    <span v-if="value" class="tag is-info">!</span>
-    <span v-else class="tag is-danger">!</span>
+    <span v-if="value" class="tag is-info">true</span>
+    <span v-else class="tag is-danger">false</span>
   </div>
 </template>
 

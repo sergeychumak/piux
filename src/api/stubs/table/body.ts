@@ -1,18 +1,19 @@
 export const tableBody = [
   {
     name: 'asdsadsadasdsa',
-    checker: false,
+    checker: true,
     desc: 'asdsa '
   },
   {
     name: 'zxcxzc',
     checker: true,
-    desc: 'asdsa '
+    desc: 'asdsa ',
+    asd: 'ddd'
   },
   {
     name: 'wewere',
     checker: false,
-    desc: 'wwwwww'
+    desc: 'test'
   }
 ]
 

@@ -12,6 +12,10 @@ export const tableHeader = {
     desc: {
       component: 'AppTextTable',
       label: 'a3'
+    },
+    asd: {
+      component: 'AppTextTable',
+      label: 'a4'
     }
   }
 }
