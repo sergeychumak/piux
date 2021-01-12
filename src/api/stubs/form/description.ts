@@ -1,4 +1,6 @@
-export const formDescription = {
+import { ILoadFormDescriptionResponse } from '@/additions/types'
+
+export const formDescription: ILoadFormDescriptionResponse = {
   name: 'Тестовая форма',
   description: [
     {

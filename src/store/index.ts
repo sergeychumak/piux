@@ -1,6 +1,8 @@
 import { createStore } from 'vuex'
 import defaultExport from '../api/entry-api'
-import { ILoadTableHeaderResponse, ISimpleObject } from '@/additions/types'
+import { ILoadTableHeaderResponse,
+  ILoadFormDescriptionResponse,
+  ISimpleObject } from '@/additions/types'
 
 const { loadFormDescription,
   loadTableHeader,
@@ -11,15 +13,15 @@ export default createStore({
   state: {},
   mutations: {},
   actions: {
-    loadFormDescription (id) {
+    loadFormDescription (id): ILoadFormDescriptionResponse {
       return loadFormDescription(id)
-        .then((resp: { data: any }) => {
+        .then((resp: { data: ILoadFormDescriptionResponse }) => {
           return resp.data
         })
     },
-    loadFormValue (id) {
+    loadFormValue (id): ISimpleObject {
       return loadValueForm(id)
-        .then((resp: { data: any }) => {
+        .then((resp: { data: ISimpleObject }) => {
           return resp.data
         })
     },

@@ -1,4 +1,6 @@
-export const tableBody = [
+import { ISimpleObject } from '@/additions/types'
+
+export const tableBody: ISimpleObject[] = [
   {
     name: 'asdsadsadasdsa',
     checker: false,

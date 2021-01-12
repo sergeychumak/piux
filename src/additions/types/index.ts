@@ -10,6 +10,11 @@
     props: ISimpleObject;
   }
 
+  export interface ILoadFormDescriptionResponse {
+    name: string;
+    description: IFormDescription[];
+  }
+
 // ==============================================
 // TABLE
 // ==============================================

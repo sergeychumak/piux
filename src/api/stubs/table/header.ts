@@ -1,4 +1,6 @@
-export const tableHeader = {
+import { ILoadTableHeaderResponse } from '@/additions/types'
+
+export const tableHeader: ILoadTableHeaderResponse = {
   name: 'Тестовая форма1',
   header: {
     name: {

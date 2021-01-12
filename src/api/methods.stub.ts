@@ -2,10 +2,12 @@ import { tableHeader } from './stubs/table/header'
 import { tableBody } from './stubs/table/body'
 import { formDescription } from './stubs/form/description'
 import { formValues } from './stubs/form/values'
-import { ILoadTableHeaderResponse, ISimpleObject } from '@/additions/types'
+import { ILoadTableHeaderResponse,
+  ILoadFormDescriptionResponse,
+  ISimpleObject } from '@/additions/types'
 
 // @params id
-export function loadFormDescription () {
+export function loadFormDescription (): Promise<{ data: ILoadFormDescriptionResponse }> {
   return new Promise((resolve) => {
     const resp = {
       data: formDescription
@@ -15,7 +17,7 @@ export function loadFormDescription () {
 }
 
 // @params id
-export function loadValueForm () {
+export function loadValueForm (): Promise<{ data: ISimpleObject }> {
   return new Promise((resolve) => {
     const resp = {
       data: formValues

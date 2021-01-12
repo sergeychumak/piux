@@ -27,7 +27,7 @@
 import { defineAsyncComponent, defineComponent } from 'vue'
 import { mapComponentsForm } from '@/components/map'
 import Store from '@/store'
-import { IFormDescription, ISimpleObject } from '@/additions/types'
+import { IFormDescription, ISimpleObject, ILoadFormDescriptionResponse } from '@/additions/types'
 
 export default defineComponent({
   name: 'dynamic-form-page',
@@ -55,7 +55,7 @@ export default defineComponent({
     async getDescription (id: string) {
       await Store
         .dispatch('loadFormDescription', id)
-        .then((res) => {
+        .then((res: ILoadFormDescriptionResponse) => {
           const { name: nameRes } = res
           const { description: descriptionRes } = res
           this.name = nameRes
@@ -65,7 +65,7 @@ export default defineComponent({
     async getValues (id: string) {
       await Store
         .dispatch('loadFormValue', id)
-        .then((res) => {
+        .then((res: ISimpleObject) => {
           this.values = res
         })
     },
