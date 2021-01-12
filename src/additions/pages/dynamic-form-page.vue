@@ -25,27 +25,9 @@
 
 <script lang="ts">
 import { defineAsyncComponent, defineComponent } from 'vue'
+import { mapComponentsForm } from '@/components/map'
 import Store from '@/store'
-
-// ==========================
-// TYPE
-// ==========================
-type TDescription = {
-  id: string;
-  component: string;
-  props: { [index: string]: any };
-}
-
-// ==========================
-// MAP
-// ==========================
-const mapComponents: {[index: string]: string} = {
-  AppInputForm: 'form/app-input-form',
-  AppLabelForm: 'form/app-label-form'
-}
-// ==========================
-// ==========================
-// ==========================
+import { IFormDescription } from '@/additions/types'
 
 export default defineComponent({
   name: 'dynamic-form-page',
@@ -59,7 +41,7 @@ export default defineComponent({
   data (): {
     loading: boolean;
     name: string;
-    description: TDescription[];
+    description: IFormDescription[];
     values: { [index: string]: any };
     } {
     return {
@@ -110,7 +92,7 @@ export default defineComponent({
     const arrayComponents: any = []
     this.description.forEach((element) => {
       const { component: key } = element
-      const { [key]: path } = mapComponents
+      const { [key]: path } = mapComponentsForm
       arrayComponents.push(this.loadComponent(key, path))
     })
     Promise.all(arrayComponents).then(async () => {

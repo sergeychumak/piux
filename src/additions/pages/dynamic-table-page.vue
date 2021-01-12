@@ -31,6 +31,7 @@
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from 'vue'
+import { mapComponentsTable } from '@/components/map'
 import Store from '@/store'
 
 // ==========================
@@ -42,17 +43,6 @@ type TElementHeader = {
   component: string;
   label: string;
 }
-
-// ==========================
-// MAP
-// ==========================
-const mapComponents: {[index: string]: string} = {
-  AppTextTable: 'table/app-text-table',
-  AppBooleanTable: 'table/app-boolean-table'
-}
-// ==========================
-// ==========================
-// ==========================
 
 export default defineComponent({
   name: 'dynamic-table-page',
@@ -111,7 +101,7 @@ export default defineComponent({
     const arrayComponents: any = []
     Object.keys(this.header).forEach((element: string) => {
       const { header: { [element]: key } } = this
-      const { [key.component]: path } = mapComponents
+      const { [key.component]: path } = mapComponentsTable
       arrayComponents.push(this.loadComponent(key.component, path))
     })
     Promise.all(arrayComponents).then(async () => {
