@@ -27,7 +27,7 @@
 import { defineAsyncComponent, defineComponent } from 'vue'
 import { mapComponentsForm } from '@/components/map'
 import Store from '@/store'
-import { IFormDescription } from '@/additions/types'
+import { IFormDescription, ISimpleObject } from '@/additions/types'
 
 export default defineComponent({
   name: 'dynamic-form-page',
@@ -42,7 +42,7 @@ export default defineComponent({
     loading: boolean;
     name: string;
     description: IFormDescription[];
-    values: { [index: string]: any };
+    values: ISimpleObject;
     } {
     return {
       loading: true,
@@ -88,8 +88,8 @@ export default defineComponent({
     }
   },
   async created () {
-    await this.getDescription(this.id)
     const arrayComponents: any = []
+    await this.getDescription(this.id)
     this.description.forEach((element) => {
       const { component: key } = element
       const { [key]: path } = mapComponentsForm

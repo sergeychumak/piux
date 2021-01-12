@@ -33,16 +33,7 @@
 import { defineComponent, defineAsyncComponent } from 'vue'
 import { mapComponentsTable } from '@/components/map'
 import Store from '@/store'
-
-// ==========================
-// TYPE
-// ==========================
-type TBody = { [index: string]: any }
-type THeader = { [index: string]: TElementHeader }
-type TElementHeader = {
-  component: string;
-  label: string;
-}
+import { ITableHeader, ISimpleObject, ILoadTableHeaderResponse } from '@/additions/types'
 
 export default defineComponent({
   name: 'dynamic-table-page',
@@ -56,8 +47,8 @@ export default defineComponent({
   data (): {
     loading: boolean;
     name: string;
-    header: THeader;
-    body: TBody;
+    header: ITableHeader;
+    body: ISimpleObject;
     } {
     return {
       loading: true,
@@ -70,7 +61,7 @@ export default defineComponent({
     async getHeader (id: string) {
       await Store
         .dispatch('loadTableHeader', id)
-        .then((res: { name: string; header: THeader }) => {
+        .then((res: ILoadTableHeaderResponse) => {
           const { name: nameRes } = res
           const { header: headerRes } = res
           this.name = nameRes
@@ -80,7 +71,7 @@ export default defineComponent({
     async getBody (id: string) {
       await Store
         .dispatch('loadTableBody', id)
-        .then((res: TBody) => {
+        .then((res: ISimpleObject) => {
           this.body = res
         })
     },

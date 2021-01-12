@@ -1,7 +1,7 @@
 export const tableBody = [
   {
     name: 'asdsadsadasdsa',
-    checker: true,
+    checker: false,
     desc: 'asdsa '
   },
   {

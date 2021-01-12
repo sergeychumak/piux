@@ -7,13 +7,40 @@
   export interface IFormDescription {
     id: string;
     component: string;
-    props: { [index: string]: any };
+    props: ISimpleObject;
   }
 
 // ==============================================
-// LIST COMPONENTS
+// TABLE
+// ==============================================
+
+  export interface ITableHeader {
+    [index: string]: ITableHeaderElement
+  }
+
+  interface ITableHeaderElement {
+    component: string;
+    label: string;
+  }
+
+  export interface ILoadTableHeaderResponse {
+    name: string;
+    header: ITableHeader;
+  }
+
+
+// ==============================================
+// COMPONENTS
 // ==============================================
 
   export interface IComponentsList {
     [index: string]: string;
+  }
+
+// ==============================================
+// other
+// ==============================================
+
+  export interface ISimpleObject {
+    [index: string]: any;
   }

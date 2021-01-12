@@ -2,8 +2,7 @@ import { tableHeader } from './stubs/table/header'
 import { tableBody } from './stubs/table/body'
 import { formDescription } from './stubs/form/description'
 import { formValues } from './stubs/form/values'
-
-const requestTime = 2000
+import { ILoadTableHeaderResponse, ISimpleObject } from '@/additions/types'
 
 // @params id
 export function loadFormDescription () {
@@ -26,7 +25,7 @@ export function loadValueForm () {
 }
 
 // @params id
-export function loadTableHeader () {
+export function loadTableHeader (): Promise<{ data: ILoadTableHeaderResponse }> {
   return new Promise((resolve) => {
     const resp = {
       data: tableHeader
@@ -36,7 +35,7 @@ export function loadTableHeader () {
 }
 
 // @params id
-export function loadTableBody () {
+export function loadTableBody (): Promise<{ data: ISimpleObject[] }> {
   return new Promise((resolve) => {
     const resp = {
       data: tableBody

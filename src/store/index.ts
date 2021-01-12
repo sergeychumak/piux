@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import defaultExport from '../api/entry-api'
+import { ILoadTableHeaderResponse, ISimpleObject } from '@/additions/types'
 
 const { loadFormDescription,
   loadTableHeader,
@@ -22,15 +23,15 @@ export default createStore({
           return resp.data
         })
     },
-    loadTableHeader (id) {
+    loadTableHeader (id): ILoadTableHeaderResponse {
       return loadTableHeader(id)
-        .then((resp: { data: any }) => {
+        .then((resp: { data: ILoadTableHeaderResponse }) => {
           return resp.data
         })
     },
-    loadTableBody (id) {
+    loadTableBody (id): ISimpleObject[] {
       return loadTableBody(id)
-        .then((resp: { data: any }) => {
+        .then((resp: { data: ISimpleObject[] }) => {
           return resp.data
         })
     }
