@@ -40,8 +40,8 @@ type TDescription = {
 // MAP
 // ==========================
 const mapComponents: {[index: string]: string} = {
-  AppInputForm: 'fields/app-input',
-  AppLabelForm: 'fields/app-label'
+  AppInputForm: 'form/app-input-form',
+  AppLabelForm: 'form/app-label-form'
 }
 // ==========================
 // ==========================
