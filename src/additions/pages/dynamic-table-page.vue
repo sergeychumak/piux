@@ -109,7 +109,7 @@ export default defineComponent({
   async created () {
     await this.getHeader(this.id)
     const arrayComponents: any = []
-    Object.keys(this.header).forEach((element) => {
+    Object.keys(this.header).forEach((element: string) => {
       const { header: { [element]: key } } = this
       const { [key.component]: path } = mapComponents
       arrayComponents.push(this.loadComponent(key.component, path))

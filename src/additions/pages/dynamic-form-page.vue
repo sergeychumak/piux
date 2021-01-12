@@ -1,32 +1,55 @@
 <template>
   <div class="dynamic-form-page">
-    <div
-      class="notification is-danger"
-      v-if="isExistsId"
-    >
-      I can not display the form I need an <strong>id</strong> parameter
+    <div v-if="loading">
+      loading...
     </div>
     <template v-else>
-      <dynamic-form
-        :data-form="descriptionForm"
-        :value-form="valueForm"
+      <div>{{ name }}</div>
+      <component
+        v-for="(field, fieldIndex) in description"
+        :is="field.component"
+        :id="field.id"
+        :key="fieldIndex"
+        :value="values[field.id]"
+        v-bind="field.props"
+        @set-new-value="setNewValue($event)"
       />
     </template>
+    <hr/>
+    <button
+      class="button is-info mr-3"
+      @click="clickSave"
+    >save</button>
   </div>
 </template>
 
 <script lang="ts">
 import { defineAsyncComponent, defineComponent } from 'vue'
 import Store from '@/store'
-import { tDescriptionForm } from '@/additions/types'
+
+// ==========================
+// TYPE
+// ==========================
+type TDescription = {
+  id: string;
+  component: string;
+  props: { [index: string]: any };
+}
+
+// ==========================
+// MAP
+// ==========================
+const mapComponents: {[index: string]: string} = {
+  AppInputForm: 'fields/app-input',
+  AppLabelForm: 'fields/app-label'
+}
+// ==========================
+// ==========================
+// ==========================
 
 export default defineComponent({
   name: 'dynamic-form-page',
-  components: {
-    DynamicForm: defineAsyncComponent(() =>
-      import(/* webpackChunkName: "dynamic-form" */ '../../components/dynamic-form.vue')
-    )
-  },
+  components: {},
   props: {
     id: { // route props
       type: String,
@@ -34,32 +57,65 @@ export default defineComponent({
     }
   },
   data (): {
-    descriptionForm: tDescriptionForm;
-    valueForm: { [index: string]: any };
+    loading: boolean;
+    name: string;
+    description: TDescription[];
+    values: { [index: string]: any };
     } {
     return {
-      descriptionForm: {
-        form: {
-          name: ''
-        },
-        data: []
-      },
-      valueForm: {}
+      loading: true,
+      name: '',
+      description: [],
+      values: {}
     }
   },
-  computed: {
-    isExistsId (): boolean {
-      return !this.id
+  methods: {
+    async getDescription (id: string) {
+      await Store
+        .dispatch('loadFormDescription', id)
+        .then((res) => {
+          const { name: nameRes } = res
+          const { description: descriptionRes } = res
+          this.name = nameRes
+          this.description = descriptionRes
+        })
+    },
+    async getValues (id: string) {
+      await Store
+        .dispatch('loadFormValue', id)
+        .then((res) => {
+          this.values = res
+        })
+    },
+    loadComponent (key: string, path: string) {
+      return new Promise((resolve) => {
+        const component = defineAsyncComponent(() =>
+          import(/* webpackChunkName: "form/[request]" */ `@/components/${path}`)
+        )
+        Object.assign(this.$options.components, {
+          [key]: component
+        })
+        resolve(component)
+      })
+    },
+    setNewValue (value: string | any) {
+      this.values = Object.assign(this.values, value)
+    },
+    clickSave () {
+      console.log(this.values)
     }
   },
-  mounted () {
-    Store.dispatch('loadDescriptionForm', 'test').then((res: tDescriptionForm) => {
-      // console.log(res)
-      this.descriptionForm = res
+  async created () {
+    await this.getDescription(this.id)
+    const arrayComponents: any = []
+    this.description.forEach((element) => {
+      const { component: key } = element
+      const { [key]: path } = mapComponents
+      arrayComponents.push(this.loadComponent(key, path))
     })
-    Store.dispatch('loadValueForm', 'test').then((res: { [index: string]: any }) => {
-      // console.log(res)
-      this.valueForm = res
+    Promise.all(arrayComponents).then(async () => {
+      await this.getValues(this.id)
+      this.loading = false
     })
   }
 })

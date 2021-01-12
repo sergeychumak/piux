@@ -25,6 +25,9 @@
 import { defineAsyncComponent, defineComponent, reactive, watch, ref } from 'vue'
 import { tDescriptionForm } from '@/additions/types'
 
+// ==========================
+// MAP
+// ==========================
 const mapComponents: {[index: string]: string} = {
   appInput: 'fields/app-input',
   appLabel: 'fields/app-label'

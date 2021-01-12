@@ -1,25 +1,25 @@
-import { descriptionFormByIdTest } from './stubs/descriptionFormByIdTest'
 import { tableHeader } from './stubs/table/header'
 import { tableBody } from './stubs/table/body'
-import { valueFormByIdTest } from './stubs/valueFormByIdTest'
+import { formDescription } from './stubs/form/description'
+import { formValues } from './stubs/form/values'
 
 const requestTime = 2000
 
 // @params id
-export function loadDescriptionFormByIdTest () {
+export function loadFormDescription () {
   return new Promise((resolve) => {
     const resp = {
-      data: descriptionFormByIdTest
+      data: formDescription
     }
     resolve(resp)
   })
 }
 
 // @params id
-export function loadValueFormByIdTest () {
+export function loadValueForm () {
   return new Promise((resolve) => {
     const resp = {
-      data: valueFormByIdTest
+      data: formValues
     }
     resolve(resp)
   })

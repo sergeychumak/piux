@@ -16,6 +16,10 @@ export const tableHeader = {
     asd: {
       component: 'AppTextTable',
       label: 'a4'
+    },
+    checker1: {
+      component: 'AppBooleanTable',
+      label: 'a211'
     }
   }
 }

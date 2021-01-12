@@ -1,25 +1,24 @@
 import { createStore } from 'vuex'
 import defaultExport from '../api/entry-api'
-import { tDescriptionForm } from '@/additions/types'
 
-const { loadDescriptionFormByIdTest,
+const { loadFormDescription,
   loadTableHeader,
   loadTableBody,
-  loadValueFormByIdTest } = defaultExport
+  loadValueForm } = defaultExport
 
 export default createStore({
   state: {},
   mutations: {},
   actions: {
-    loadDescriptionForm (id): tDescriptionForm {
-      return loadDescriptionFormByIdTest(id)
-        .then((resp: { data: tDescriptionForm }) => {
+    loadFormDescription (id) {
+      return loadFormDescription(id)
+        .then((resp: { data: any }) => {
           return resp.data
         })
     },
-    loadValueForm (id) {
-      return loadValueFormByIdTest(id)
-        .then((resp: { data: { [index: string]: any } }) => {
+    loadFormValue (id) {
+      return loadValueForm(id)
+        .then((resp: { data: any }) => {
           return resp.data
         })
     },
